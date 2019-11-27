@@ -12,7 +12,7 @@ module.exports = function (app) {
             let payload = jwt.decode(token)
 
             if (payload.exp < new Date().getTime()) {
-                throw '401'
+                throw 'Sessão Inválida'
             }
 
             const conn = app.persistence.connection
