@@ -1,6 +1,10 @@
 const chai = require('chai'),
 	expect = chai.expect,
-	userSVC = require('../services/user');
+	userSVC = require('../services/user'),
+	chaiHttp = require('chai-http'),
+	app = require('../server/index')
+
+chai.use(chaiHttp)
 
 describe('Unit Test TechMahindra', () => {
 
@@ -56,7 +60,7 @@ describe('Unit Test TechMahindra', () => {
 		expect(user).to.be.an('Object')
 	})
 
-	it('Busca usuário por id',async()=>{
+	it('Busca usuário por id', async () => {
 		let user = await userSVC.findId(userId)
 		expect(user).to.be.an('object')
 	})
@@ -64,5 +68,21 @@ describe('Unit Test TechMahindra', () => {
 	it('Delete user', async () => {
 		await userSVC.delete({ email: 'charlie@ig.com.br' })
 		await userSVC.delete({ email: 'charlie2@ig.com.br' })
+	})
+
+	it('Signup Route',  (done) => {
+		chai.request(app)
+			.post('/signup') 
+			.send({
+				nome: 'Tango',
+				email: 'tango@ig.com.br',
+				senha: 'foxtrot',
+				telefones: [{ ddd: '11', numero: '1214312-1234' }]
+			}).end((err, res) => {
+                expect(res).to.have.status(200)
+                expect(res.body).to.be.a('object')
+                token = res.body.token
+                done()
+            })
 	})
 });
