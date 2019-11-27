@@ -148,6 +148,6 @@ describe('Unit Test TechMahindra', () => {
 	it('Delete user', async () => {
 		await userSVC.delete({ email: 'charlie@ig.com.br' })
 		await userSVC.delete({ email: 'charlie2@ig.com.br' })
-		await userSVC.delete({ email: 'tango@ig.com.br' })
+		//await userSVC.delete({ email: 'tango@ig.com.br' })
 	})
 });
