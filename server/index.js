@@ -2,10 +2,10 @@ const express = require('express'),
     bodyParses = require('body-parser'),
     morgan = require('morgan'),
     logger = require('../services/logger'),
-    passport = require("../services/auth"),
+    passport = require('../services/auth'),
     db = require('../config'),
     helmet = require('helmet'),
-    cors = require('cors'), 
+    cors = require('cors'),
     userRoute = require('../routers/user')
 
 const app = express()
@@ -29,6 +29,6 @@ app.use(morgan('common', {
 const auth = passport(app)
 app.use(auth.initialize())
 
-app.use('/',userRoute)
+app.use('/', userRoute)
 
 module.exports = app
